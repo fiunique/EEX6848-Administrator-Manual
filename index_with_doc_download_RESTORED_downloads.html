@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrator's Manual</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+3:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #e3f2fd;
+      --color-surface: #ffffff;
+      --color-text: #1a1a1a;
+      --color-primary: #1976d2;
+      --color-secondary: #666666;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .font-heading {
+      font-family: 'Libre Baskerville', Georgia, serif;
+    }
+    .font-body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+    }
+    .manual-container {
+      background: linear-gradient(135deg, var(--color-bg) 0%, #1a2744 50%, var(--color-bg) 100%);
+    }
+    .section-card {
+      background: var(--color-surface);
+      border-left: 4px solid var(--color-primary);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .section-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 10px 40px rgba(59, 130, 246, 0.1);
+    }
+    .toc-link {
+      transition: all 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .toc-link:hover {
+      color: var(--color-primary);
+      padding-left: 8px;
+    }
+    .subsection-marker {
+      width: 8px;
+      height: 8px;
+      background: var(--color-primary);
+      border-radius: 50%;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    th {
+      background: rgba(59, 130, 246, 0.2);
+    }
+    td, th {
+      border: 1px solid var(--color-secondary);
+    }
+    .checklist-item::before {
+      content: '✓';
+      color: var(--color-primary);
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    .action-link {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid var(--color-primary);
+      border-radius: 0.375rem;
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      margin-top: 1rem;
+    }
+    .action-link:hover {
+      background: rgba(59, 130, 246, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+    .download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    }
+    .download-btn:active {
+      transform: scale(0.98);
+    }
+    @media print {
+      .manual-container {
+        background: white !important;
+      }
+      .section-card {
+        break-inside: avoid;
+      }
+      .download-btn {
+        display: none;
+      }
+    }
+    #print-content {
+      background: white;
+      color: #1a1a1a;
+      padding: 2rem;
+    }
+    #print-content h1,
+    #print-content h2,
+    #print-content h3,
+    #print-content p,
+    #print-content li {
+      color: #1a1a1a;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body" style="background: var(--color-bg); color: var(--color-text);">
+  <div class="manual-container h-full overflow-auto">
+   <div class="max-w-5xl mx-auto px-6 py-12">
+    <!-- Header -->
+    <header class="text-center mb-16">
+     <h1 id="main-title" class="font-heading text-4xl md:text-5xl font-bold mb-4" style="color: var(--color-text);">Administrator's Manual</h1>
+     <p class="text-xl md:text-2xl font-light mb-6" style="color: var(--color-secondary);">Implementing Evidence-Based Special Education Evaluation Practices</p>
+     <p class="text-lg italic font-heading" style="color: var(--color-primary);">A Knowledge-Building Framework for School Leaders</p>
+     <div class="mt-8 flex flex-wrap justify-center gap-4 text-sm" style="color: var(--color-secondary);"><span class="px-3 py-1 rounded" style="background: var(--color-surface);">Evidence-Based Brief</span> <span class="px-3 py-1 rounded" style="background: var(--color-surface);">Fullan, Knowledge Building Ch. 5</span>
+     </div>
+    
+     <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <button class="download-btn" onclick="downloadPDF()" aria-label="Download as PDF">
+       <span aria-hidden="true">⬇️</span><span>Download PDF</span>
+      </button>
+      <button class="download-btn" onclick="downloadDOC()" aria-label="Download as Word document">
+       <span aria-hidden="true">📝</span><span>Download DOC</span>
+      </button>
+     </div>
+</header><!-- Table of Contents -->
+    <nav class="section-card rounded-lg p-8 mb-12">
+     <h2 class="font-heading text-2xl font-bold mb-6" style="color: var(--color-primary);">📋 Table of Contents</h2>
+     <div class="grid md:grid-cols-2 gap-4"><a href="#section-1" class="toc-link block py-2" style="color: var(--color-text);">I. Vision and Moral Purpose</a> <a href="#section-2" class="toc-link block py-2" style="color: var(--color-text);">II. Legal and Procedural Foundations</a> <a href="#section-3" class="toc-link block py-2" style="color: var(--color-text);">III. Evidence-Based Evaluation Practices</a> <a href="#section-4" class="toc-link block py-2" style="color: var(--color-text);">IV. Knowledge-Building Implementation</a> <a href="#section-5" class="toc-link block py-2" style="color: var(--color-text);">V. Quality Assurance Protocols</a> <a href="#section-6" class="toc-link block py-2" style="color: var(--color-text);">VI. References &amp; Resources</a>
+     </div>
+    </nav><!-- Main Content for Printing -->
+    <div id="print-content">
+     <!-- Section I -->
+     <section id="section-1" class="section-card rounded-lg p-8 mb-8">
+      <h2 class="font-heading text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" style="background: var(--color-primary); color: white;">I</span> <span style="color: var(--color-text);">Vision and Moral Purpose</span></h2>
+      <p class="mb-6 leading-relaxed text-lg">The evaluation of students suspected of having disabilities is not a compliance exercise; it is a <strong style="color: var(--color-primary);">moral commitment to equitable access to education</strong>. The Individuals with Disabilities Education Act (IDEA) guarantees a Free Appropriate Public Education (FAPE). Administrators are responsible for ensuring that evaluation systems are timely, comprehensive, culturally responsive, and instructionally meaningful.</p>
+      <div class="p-6 rounded-lg mb-6" style="background: rgba(59, 130, 246, 0.1); border: 1px solid var(--color-primary);">
+       <p class="italic font-heading text-lg" style="color: var(--color-text);">"Fullan's knowledge-building framework positions leadership as the creation of systems where information becomes shared professional knowledge."</p>
+      </div>
+      <p class="mb-6 leading-relaxed">Evaluation reports must not function as static compliance artifacts. They must serve as <strong>organizational learning tools</strong> that:</p>
+      <ul class="space-y-3 mb-6 pl-4">
+       <li class="checklist-item">Clarify instructional needs</li>
+       <li class="checklist-item">Improve intervention fidelity</li>
+       <li class="checklist-item">Guide resource allocation</li>
+       <li class="checklist-item">Strengthen tiered systems of support</li>
+      </ul>
+      <div class="p-4 rounded-lg" style="background: var(--color-bg);">
+       <p class="font-semibold" style="color: var(--color-primary);">Core Principle: The administrator's moral purpose is to ensure that evaluation practices improve student outcomes while protecting procedural integrity.</p>
+      </div>
+     </section><!-- Section II -->
+     <section id="section-2" class="section-card rounded-lg p-8 mb-8">
+      <h2 class="font-heading text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" style="background: var(--color-primary); color: white;">II</span> <span style="color: var(--color-text);">Legal and Procedural Foundations</span></h2><!-- Subsection A -->
+      <div class="mb-8">
+       <h3 class="text-xl font-bold mb-4 flex items-center gap-3"><span class="subsection-marker"></span> <span style="color: var(--color-text);">A. Role of the LEA Representative</span></h3>
+       <p class="mb-4 leading-relaxed">The LEA Representative is responsible for:</p>
+       <ul class="space-y-2 pl-6 mb-4">
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Facilitating IEP and eligibility meetings</span></li>
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Ensuring compliance with IDEA and state rules</span></li>
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Verifying that IEPs are legally sufficient</span></li>
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Allocating district resources appropriately</span></li>
+       </ul>
+       <p class="p-3 rounded text-sm" style="background: var(--color-bg); color: var(--color-secondary);"><strong>Note:</strong> The LEA must attend the meeting in its entirety and ensure all required team members are present.</p>
+      </div><!-- Subsection B -->
+      <div class="mb-8">
+       <h3 class="text-xl font-bold mb-4 flex items-center gap-3"><span class="subsection-marker"></span> <span style="color: var(--color-text);">B. Required Team Membership</span></h3>
+       <div class="overflow-x-auto">
+        <table class="w-full text-left">
+         <thead>
+          <tr>
+           <th class="p-3 font-semibold" style="color: var(--color-text);">Team Member</th>
+           <th class="p-3 font-semibold" style="color: var(--color-text);">Required</th>
+          </tr>
+         </thead>
+         <tbody>
+          <tr>
+           <td class="p-3">Parent/Guardian</td>
+           <td class="p-3" style="color: var(--color-primary);">✓ Yes</td>
+          </tr>
+          <tr>
+           <td class="p-3">General Education Teacher</td>
+           <td class="p-3" style="color: var(--color-primary);">✓ Yes</td>
+          </tr>
+          <tr>
+           <td class="p-3">ESE Service Provider</td>
+           <td class="p-3" style="color: var(--color-primary);">✓ Yes</td>
+          </tr>
+          <tr>
+           <td class="p-3">LEA Representative</td>
+           <td class="p-3" style="color: var(--color-primary);">✓ Yes</td>
+          </tr>
+          <tr>
+           <td class="p-3">Evaluation Specialist</td>
+           <td class="p-3" style="color: var(--color-primary);">✓ Yes</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <p class="mt-4 text-sm" style="color: var(--color-secondary);">If a member is absent, documentation of excusal is required.</p>
+      </div><!-- Subsection C -->
+      <div class="mb-8">
+       <h3 class="text-xl font-bold mb-4 flex items-center gap-3"><span class="subsection-marker"></span> <span style="color: var(--color-text);">C. Timelines and Consent</span></h3>
+       <div class="p-4 rounded-lg mb-4" style="background: var(--color-bg);">
+        <p class="font-semibold mb-2" style="color: var(--color-primary);">Florida Rule 6A-6.0331</p>
+       </div>
+       <p class="mb-4">The district must request consent within <strong style="color: var(--color-primary);">30 calendar days</strong> of:</p>
+       <ul class="space-y-2 pl-6 mb-4">
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Parent request</span></li>
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Inadequate response to intensive intervention</span></li>
+       </ul>
+       <ul class="space-y-2 pl-6">
+        <li class="checklist-item">Evaluations must be sufficiently comprehensive</li>
+        <li class="checklist-item">Reevaluations occur every three years unless waived</li>
+       </ul>
+       <p class="mt-4 p-3 rounded text-sm" style="background: var(--color-bg); color: var(--color-secondary);">Administrators must monitor timeline compliance through SIS and EdPlan documentation systems.</p>
+      </div><!-- Subsection D -->
+      <div class="mb-8">
+       <h3 class="text-xl font-bold mb-4 flex items-center gap-3"><span class="subsection-marker"></span> <span style="color: var(--color-text);">D. Comprehensive Evaluation Standards</span></h3>
+       <p class="mb-4">A comprehensive evaluation must:</p>
+       <ul class="space-y-2 pl-6 mb-4">
+        <li class="checklist-item">Review attendance and intervention history</li>
+        <li class="checklist-item">Include multiple assessment tools</li>
+        <li class="checklist-item">Avoid reliance on a single measure</li>
+        <li class="checklist-item">Address all suspected areas of disability</li>
+       </ul>
+       <div class="p-4 rounded-lg" style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid var(--color-primary);">
+        <p class="font-semibold" style="color: var(--color-text);"><strong>Important:</strong> SLD, LI, and E/BD require documented PS/RtI intervention data prior to or concurrent with referral.</p>
+       </div>
+      </div><!-- Subsection E -->
+      <div class="mb-8">
+       <h3 class="text-xl font-bold mb-4 flex items-center gap-3"><span class="subsection-marker"></span> <span style="color: var(--color-text);">E. Parent Participation and Procedural Safeguards</span></h3>
+       <p class="mb-4">Administrators must ensure:</p>
+       <ul class="space-y-2 pl-6 mb-4">
+        <li class="checklist-item"><strong>10-day written notice</strong> of IEP meetings</li>
+        <li class="checklist-item">Documentation of contact attempts</li>
+        <li class="checklist-item">Provision of Procedural Safeguards annually and at required trigger points</li>
+       </ul>
+       <p class="text-sm" style="color: var(--color-secondary);">Meaningful parent participation must be documented in conference notes.</p>
+      </div><!-- Subsection F -->
+      <div>
+       <h3 class="text-xl font-bold mb-4 flex items-center gap-3"><span class="subsection-marker"></span> <span style="color: var(--color-text);">F. Transfer Students</span></h3>
+       <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-5 rounded-lg" style="background: var(--color-bg);">
+         <h4 class="font-bold mb-3" style="color: var(--color-primary);">In-State Transfers</h4>
+         <ul class="space-y-2">
+          <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Implement comparable services immediately</span></li>
+          <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Adopt or develop new IEP by annual review date</span></li>
+         </ul>
+        </div>
+        <div class="p-5 rounded-lg" style="background: var(--color-bg);">
+         <h4 class="font-bold mb-3" style="color: var(--color-primary);">Out-of-State Transfers</h4>
+         <ul class="space-y-2">
+          <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Provide comparable services</span></li>
+          <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Conduct reevaluation or determine if unnecessary</span></li>
+          <li class="flex items-start gap-2"><span style="color: var(--color-primary);">•</span> <span>Develop new IEP</span></li>
+         </ul>
+        </div>
+       </div>
+      </div><a href="https://www.fldoe.org/" target="_blank" rel="noopener noreferrer" class="action-link">Florida Department of Education Resources →</a>
+     </section><!-- Section III -->
+     <section id="section-3" class="section-card rounded-lg p-8 mb-8">
+      <h2 class="font-heading text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" style="background: var(--color-primary); color: white;">III</span> <span style="color: var(--color-text);">Evidence-Based Evaluation Practices</span></h2>
+      <div class="p-6 rounded-lg mb-6" style="background: rgba(59, 130, 246, 0.1); border: 1px solid var(--color-primary);">
+       <p class="italic font-heading text-lg" style="color: var(--color-text);">"The Council for Exceptional Children defines evidence-based practices (EBPs) as practices supported by high-quality experimental research, replication, and representative participant samples."</p>
+      </div>
+      <p class="mb-6 leading-relaxed text-lg">Administrators must ensure:</p>
+      <ul class="space-y-3 mb-8 pl-4">
+       <li class="checklist-item">Assessment tools are psychometrically valid</li>
+       <li class="checklist-item">Interventions are implemented with fidelity</li>
+       <li class="checklist-item">Eligibility decisions are grounded in high-quality data</li>
+      </ul>
+      <h3 class="text-xl font-bold mb-4" style="color: var(--color-text);">Decision-Making Protocol</h3>
+      <div class="overflow-x-auto">
+       <table class="w-full text-left">
+        <thead>
+         <tr>
+          <th class="p-3 font-semibold" style="color: var(--color-text);">Phase</th>
+          <th class="p-3 font-semibold" style="color: var(--color-text);">Action</th>
+          <th class="p-3 font-semibold" style="color: var(--color-text);">Evidence Required</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr>
+          <td class="p-3 font-semibold" style="color: var(--color-primary);">1. Screening</td>
+          <td class="p-3">Universal screening data review</td>
+          <td class="p-3">Benchmark assessments, teacher observations</td>
+         </tr>
+         <tr>
+          <td class="p-3 font-semibold" style="color: var(--color-primary);">2. Intervention</td>
+          <td class="p-3">Tiered intervention implementation</td>
+          <td class="p-3">Progress monitoring data, fidelity checks</td>
+         </tr>
+         <tr>
+          <td class="p-3 font-semibold" style="color: var(--color-primary);">3. Referral</td>
+          <td class="p-3">Formal evaluation referral</td>
+          <td class="p-3">PS/RtI documentation, parent consent</td>
+         </tr>
+         <tr>
+          <td class="p-3 font-semibold" style="color: var(--color-primary);">4. Evaluation</td>
+          <td class="p-3">Comprehensive assessment</td>
+          <td class="p-3">Multiple measures across domains</td>
+         </tr>
+         <tr>
+          <td class="p-3 font-semibold" style="color: var(--color-primary);">5. Eligibility</td>
+          <td class="p-3">Team determination</td>
+          <td class="p-3">Evaluation report, eligibility criteria</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+</section><!-- Section IV -->
+     <section id="section-4" class="section-card rounded-lg p-8 mb-8">
+      <h2 class="font-heading text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" style="background: var(--color-primary); color: white;">IV</span> <span style="color: var(--color-text);">Knowledge-Building Implementation</span></h2>
+      <p class="mb-6 leading-relaxed text-lg">Drawing from Fullan's framework, effective implementation requires creating systems where professional knowledge is shared, refined, and applied collaboratively.</p>
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+       <div class="p-5 rounded-lg text-center" style="background: var(--color-bg);">
+        <div class="text-3xl mb-3">
+         🔄
+        </div>
+        <h4 class="font-bold mb-2" style="color: var(--color-primary);">Continuous Learning</h4>
+        <p class="text-sm" style="color: var(--color-secondary);">Regular professional development on evaluation practices</p>
+       </div>
+       <div class="p-5 rounded-lg text-center" style="background: var(--color-bg);">
+        <div class="text-3xl mb-3">
+         👥
+        </div>
+        <h4 class="font-bold mb-2" style="color: var(--color-primary);">Collaborative Teams</h4>
+        <p class="text-sm" style="color: var(--color-secondary);">Cross-functional teams reviewing evaluation quality</p>
+       </div>
+       <div class="p-5 rounded-lg text-center" style="background: var(--color-bg);">
+        <div class="text-3xl mb-3">
+         📊
+        </div>
+        <h4 class="font-bold mb-2" style="color: var(--color-primary);">Data-Driven Decisions</h4>
+        <p class="text-sm" style="color: var(--color-secondary);">Evidence-based eligibility determinations</p>
+       </div>
+      </div>
+      <h3 class="text-xl font-bold mb-4" style="color: var(--color-text);">Implementation Strategies</h3>
+      <ul class="space-y-3 pl-4">
+       <li class="checklist-item">Establish evaluation review committees</li>
+       <li class="checklist-item">Create shared documentation templates</li>
+       <li class="checklist-item">Implement peer review processes</li>
+       <li class="checklist-item">Develop feedback loops for continuous improvement</li>
+       <li class="checklist-item">Foster communities of practice around assessment</li>
+      </ul><a href="https://michaelfullan.ca/" target="_blank" rel="noopener noreferrer" class="action-link">Michael Fullan - Knowledge Building Resources →</a>
+     </section><!-- Section V -->
+     <section id="section-5" class="section-card rounded-lg p-8 mb-8">
+      <h2 class="font-heading text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" style="background: var(--color-primary); color: white;">V</span> <span style="color: var(--color-text);">Quality Assurance Protocols</span></h2>
+      <p class="mb-6 leading-relaxed">Administrators must implement systematic quality assurance measures to maintain evaluation integrity and compliance.</p>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+       <div class="p-5 rounded-lg" style="background: var(--color-bg);">
+        <h4 class="font-bold mb-3" style="color: var(--color-primary);">📋 Documentation Review</h4>
+        <ul class="space-y-2 text-sm">
+         <li>• Monthly file audits</li>
+         <li>• Timeline compliance tracking</li>
+         <li>• Consent verification</li>
+         <li>• Meeting documentation review</li>
+        </ul>
+       </div>
+       <div class="p-5 rounded-lg" style="background: var(--color-bg);">
+        <h4 class="font-bold mb-3" style="color: var(--color-primary);">📈 Performance Metrics</h4>
+        <ul class="space-y-2 text-sm">
+         <li>• Evaluation completion rates</li>
+         <li>• Timeline adherence percentages</li>
+         <li>• Parent participation rates</li>
+         <li>• Eligibility accuracy reviews</li>
+        </ul>
+       </div>
+      </div>
+      <h3 class="text-xl font-bold mb-4" style="color: var(--color-text);">Corrective Action Framework</h3>
+      <div class="overflow-x-auto">
+       <table class="w-full text-left">
+        <thead>
+         <tr>
+          <th class="p-3 font-semibold" style="color: var(--color-text);">Issue Level</th>
+          <th class="p-3 font-semibold" style="color: var(--color-text);">Response</th>
+          <th class="p-3 font-semibold" style="color: var(--color-text);">Timeline</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr>
+          <td class="p-3">Minor Documentation</td>
+          <td class="p-3">Technical assistance provided</td>
+          <td class="p-3">5 business days</td>
+         </tr>
+         <tr>
+          <td class="p-3">Procedural Violation</td>
+          <td class="p-3">Corrective action plan</td>
+          <td class="p-3">10 business days</td>
+         </tr>
+         <tr>
+          <td class="p-3">Compliance Failure</td>
+          <td class="p-3">Immediate remediation required</td>
+          <td class="p-3">Immediate</td>
+         </tr>
+        </tbody>
+       </table>
+      </div><a href="https://sites.ed.gov/idea/" target="_blank" rel="noopener noreferrer" class="action-link">U.S. Department of Education IDEA Resources →</a>
+     </section><!-- Section VI -->
+     <section id="section-6" class="section-card rounded-lg p-8 mb-8">
+      <h2 class="font-heading text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" style="background: var(--color-primary); color: white;">VI</span> <span style="color: var(--color-text);">References &amp; Resources</span></h2>
+      <div class="space-y-4 mb-8">
+       <div class="p-4 rounded-lg" style="background: var(--color-bg);">
+        <p class="leading-relaxed">Council for Exceptional Children. (n.d.). <em>Evidence-based special education.</em> CEC Professional Standards.</p><a href="https://www.cec.sped.org/" target="_blank" rel="noopener noreferrer" class="text-sm inline-block mt-2" style="color: var(--color-primary); text-decoration: underline;">Visit CEC →</a>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--color-bg);">
+        <p class="leading-relaxed">Fullan, M. (2019). <em>Nuance: Why some leaders succeed and others fail</em> (Chapter 5: Knowledge Building). Thousand Oaks, CA: Corwin Press.</p><a href="https://michaelfullan.ca/books/" target="_blank" rel="noopener noreferrer" class="text-sm inline-block mt-2" style="color: var(--color-primary); text-decoration: underline;">Browse Fullan Publications →</a>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--color-bg);">
+        <p class="leading-relaxed">Florida Administrative Code. Rule 6A-6.0331. <em>General education intervention procedures, evaluation, and eligibility.</em></p><a href="https://www.flsenate.gov/laws/statutes/2024/1003.571" target="_blank" rel="noopener noreferrer" class="text-sm inline-block mt-2" style="color: var(--color-primary); text-decoration: underline;">Florida Statutes →</a>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--color-bg);">
+        <p class="leading-relaxed">Individuals with Disabilities Education Act, 20 U.S.C. § 1400 (2004).</p><a href="https://sites.ed.gov/idea/" target="_blank" rel="noopener noreferrer" class="text-sm inline-block mt-2" style="color: var(--color-primary); text-decoration: underline;">IDEA Information Center →</a>
+       </div>
+      </div>
+      <div class="p-6 rounded-lg" style="background: rgba(59, 130, 246, 0.1); border: 1px solid var(--color-primary);">
+       <h3 class="font-bold mb-3" style="color: var(--color-primary);">Additional Resources</h3>
+       <ul class="space-y-2 text-sm">
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">📚</span> <a href="https://www.wrightslaw.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline;">Wright's Law - Special Education Law &amp; Advocacy</a></li>
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">📚</span> <a href="https://www.parentcenterhub.org/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline;">National Center for Learning Disabilities</a></li>
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">📚</span> <a href="https://cci.fsu.edu/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline;">Florida's Center for Child Innovation</a></li>
+        <li class="flex items-start gap-2"><span style="color: var(--color-primary);">📚</span> <a href="https://www.interventioncentral.org/" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline;">Intervention Central - RTI Resources</a></li>
+       </ul>
+      </div>
+     </section><!-- Footer -->
+     <footer class="text-center py-8 mt-8" style="border-top: 1px solid var(--color-secondary);">
+      <p class="text-sm" style="color: var(--color-secondary);">Administrator's Manual — Evidence-Based Special Education Evaluation Practices</p>
+      <p class="text-sm mt-2" style="color: var(--color-secondary);">Knowledge-Building Framework for School Leaders</p>
+      <p class="text-sm mt-4" style="color: var(--color-secondary);">Based on Evidence-Based Practices and Michael Fullan's Knowledge Building Framework</p>
+     </footer>
+    </div>
+   </div>
+  </div>
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById('print-content');
+      const opt = {
+        margin: 10,
+        filename: 'Administrators_Manual_SpecialEd.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+      };
+
+      // Create a temporary copy for PDF generation
+      const tempDiv = element.cloneNode(true);
+
+      // Remove download buttons from the PDF version
+      const buttons = tempDiv.querySelectorAll('.download-btn, .action-link');
+      buttons.forEach(btn => {
+        if (btn.classList.contains('download-btn')) {
+          btn.style.display = 'none';
+        }
+      });
+
+      html2pdf().set(opt).from(tempDiv).save();
+    }
+
+
+    function downloadDOC() {
+      const content = document.getElementById('print-content');
+      if (!content) return;
+
+      // Build a Word-compatible HTML document
+      const styles = `
+        <style>
+          body { font-family: 'Source Sans 3', Arial, sans-serif; color: #1a1a1a; line-height: 1.45; }
+          h1, h2, h3, h4 { font-family: 'Libre Baskerville', Georgia, serif; color: #1a1a1a; }
+          table { border-collapse: collapse; width: 100%; }
+          td, th { border: 1px solid #666666; padding: 8px; vertical-align: top; }
+          th { background: rgba(59,130,246,0.2); }
+          ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+          .section-card { border-left: 4px solid #1976d2; padding: 16px; margin-bottom: 16px; }
+          .action-link { display: none !important; }
+          .download-btn { display: none !important; }
+        </style>
+      `;
+
+      const header = `
+        <div style="margin-bottom: 16px;">
+          <h1 style="margin: 0 0 4px 0;">Administrator's Manual</h1>
+          <div style="color: #666666; font-size: 14px;">
+            Implementing Evidence-Based Special Education Evaluation Practices
+          </div>
+        </div>
+      `;
+
+      // Clone to strip interactive elements
+      const clone = content.cloneNode(true);
+      clone.querySelectorAll('.download-btn, .action-link').forEach(el => el.remove());
+
+      const fullHtml = `
+        <!doctype html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            ${styles}
+          </head>
+          <body>
+            ${header}
+            ${clone.innerHTML}
+          </body>
+        </html>
+      `;
+
+      // Add BOM so Word opens UTF-8 cleanly
+      const blob = new Blob(['\ufeff', fullHtml], { type: 'application/msword;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Administrators_Manual_SpecialEd.doc';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    // Smooth scroll for table of contents
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1ff67e753fc880',t:'MTc3MTc3ODgyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
